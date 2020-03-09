@@ -1,0 +1,25 @@
+server:
+  port: 443
+  #根目录设置
+  #servlet:
+    #context-path: /demo
+  ssl:
+    # 证书名称
+    key-store: tomcat.keystore
+    #密钥库密码
+    key-store-password: 123456
+    key-store-type: JKS
+    key-alias: tomcat
+spring:
+  resources:
+    static-locations: classpath:/static/,classpath:/templates/
+
+    # Thymeleaf配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/thymeleaf/
+    suffix: .html
+    mode: HTML #配置视图模板类型，如果视图模板使用的是html5需要配置
+    encoding: UTF-8
+    servlet:
+      content-type: text/html #响应类型

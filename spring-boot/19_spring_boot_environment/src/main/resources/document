@@ -1,0 +1,4 @@
+windows:
+    指定Spring-Boot加载不同环境的配置文件:java -jar 文件 --spring.profiles.active={加载的配置文件}
+
+linux:

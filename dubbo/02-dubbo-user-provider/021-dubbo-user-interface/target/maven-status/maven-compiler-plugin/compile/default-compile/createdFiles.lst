@@ -1,0 +1,3 @@
+com\bjsxt\dubbo\service\AddUserDubboService.class
+com\bjsxt\dubbo\service\DeleteUserDubboService.class
+com\bjsxt\dubbo\service\SearchUserDubboService.class

@@ -1,0 +1,15 @@
+server:
+  port: 80
+spring:
+  resources:
+    static-locations: classpath:/static/
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/thymeleaf/
+    suffix: .html
+    mode: HTML5
+    servlet:
+      content-type: text/html
+    encoding: UTF-8
+

@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+spring:
+  resources:
+    static-locations: classpath:/static/
+    #配置单个上传文件的大小限制
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      #配置在一次请求中上传文件的总容量的限制
+      max-request-size: 20MB
+

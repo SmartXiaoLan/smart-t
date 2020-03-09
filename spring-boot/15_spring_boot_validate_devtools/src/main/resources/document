@@ -1,0 +1,11 @@
+@NotNull:判断基本数据类型的对象类型是否为Null
+@NotBlank:判断字符串是否为Null或者是空字符串。
+@NotEmpty:判断集合是否为空
+@Length:判断字符的长度(最大或最小)
+@Min:判断数值最小值
+@Max:判断数值最大值
+@Email:判断邮箱是否合法
+
+
+
+本DEMO包含热部署

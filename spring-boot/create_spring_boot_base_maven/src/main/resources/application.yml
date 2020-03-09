@@ -1,0 +1,6 @@
+server:
+#  port: 90
+  port: ${random.int(1024,9999)}
+#school:
+#  name: smt
+#  addr: ${school.name}

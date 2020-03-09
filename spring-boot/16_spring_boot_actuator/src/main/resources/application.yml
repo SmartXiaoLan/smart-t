@@ -1,0 +1,19 @@
+server:
+  port: 81
+  #配置访问端点的根路径
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      #配置开启其他端点的URI
+      exposure:
+#        exclude:
+        #开启所有的端点访问: "*"
+        #开启指定端点访问:如 beans,env
+        include: "*"
+  #指定服务端的访问地址
+spring:
+  boot:
+    admin:
+      client:
+        url: "http://localhost:80"

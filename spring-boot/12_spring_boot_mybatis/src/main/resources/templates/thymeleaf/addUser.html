@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加User</title>
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+</head>
+<body>
+    <form th:action="@{/user/addUser}" method="post">
+        名称<input name="username" type="text" maxlength="8"><br/>
+        性别<input name="usersex" type="text" maxlength="1"><br/>
+        <button type="submit">OK</button>
+    </form>
+</body>
+</html>

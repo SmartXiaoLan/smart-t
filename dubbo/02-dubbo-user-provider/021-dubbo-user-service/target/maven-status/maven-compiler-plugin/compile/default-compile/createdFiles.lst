@@ -1,0 +1,4 @@
+com\bjsxt\Start.class
+com\bjsxt\dubbo\service\impl\AddUserDubboServiceImpl.class
+com\bjsxt\dubbo\service\impl\DeleteUserDubboServiceImpl.class
+com\bjsxt\dubbo\service\impl\SearchUserDubboServiceImpl.class

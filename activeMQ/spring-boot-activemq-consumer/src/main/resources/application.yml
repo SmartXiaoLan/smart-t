@@ -1,0 +1,33 @@
+server:
+  port: 80
+spring:
+  mvc:
+    view:
+      prefix: /WEB_INF/JSP/
+      suffix: .jsp
+  activemq:
+    broker-url: tcp://192.168.66.186:61616
+    user: admin
+    password: admin
+    #是否使用内置MQ
+    in-memory: false
+      #强制的连接过期时间，与idleTimeout的区别在于：idleTimeout是在连接空闲一段时间失效，而expiryTimeout不管当前连接的情况，只要达到指定时间就失效。默认为0，never
+    #      expiry-timeout: 0
+    #配置又缓存的ConnectionFactory,session的缓存大小定制
+    packages:
+      #信任所有包
+      trust-all: true
+      #指定跳过包检查
+#      trusted: cn.smart
+  jms:
+    cache:
+      session-cache-size: 3
+      enabled: false
+    template:
+      #默认队列
+      default-destination: test-spring
+    #设置监听方式
+    listener:
+      acknowledge-mode: auto
+    #activemq提供的是queue模式，若要使用topic模式需要配置下面配置
+    pub-sub-domain: true

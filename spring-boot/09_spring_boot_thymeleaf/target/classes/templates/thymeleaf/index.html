@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>划水专用</title>
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+    <style type="text/css">
+        td{
+            text-align: center;
+        }
+        table,th,td,tr{
+            border-color: violet;
+        }
+    </style>
+</head>
+<body>
+
+<span style="color: red ; font-size: 26px" th:text="Thymeleaf"></span>
+<hr/>
+<font>作用域中的字符串:</font><span th:text="${msg}"></span>
+<hr/>
+<font>字符串是否为空?</font><span th:text="${msg.isEmpty()}"></span>
+<br/><br/>
+<font style="font-size: 25px;color: darkgreen">字符串操作th:text</font><br/><br/>
+<font>字符串是否包含指定的子串is:</font><span th:text="${msg.contains('is')}"></span><br/>
+<font>字符串是否包含指定的子串os:</font><span th:text="${#strings.contains(msg,'os')}"></span>
+<br/><br/>
+<font>字符串是否以This子串开头:</font><span th:text="${msg.startsWith('This')}"></span><br/>
+<font>字符串是否以this子串开头:</font><span th:text="${#strings.startsWith(msg,'this')}"></span>
+<br/><br/>
+<font>字符串是否以Html...子串结尾:</font><span th:text="${msg.endsWith('Html...')}"></span><br/>
+<font>字符串是否以html...子串结尾:</font><span th:text="${#strings.endsWith(msg,'html...')}"></span>
+<br/><br/>
+<font>字符串的长度为:</font><span th:text="${#strings.length(msg)}"></span>
+<br/><br/>
+<font>查找子串的位置，并返回该子串的下标，如果没找到则返回-1(f):</font><span th:text="${#strings.indexOf(msg,'f')}"></span>
+<br/><br/>
+<font>截取子串，用法与jdk String类下SubString 方法相同:</font><span th:text="${#strings.substring(msg,2)}"></span><br/>
+<font>截取子串，用法与jdk String类下SubString 方法相同:</font><span th:text="${#strings.substring(msg,0,2)}"></span>
+<br/><br/>
+<font>字符串转大写:</font><span th:text="${#strings.toUpperCase(msg)}"></span><br/>
+<font>字符串转小写:</font><span th:text="${#strings.toLowerCase(msg)}"></span>
+
+<hr/>
+<font style="font-size: 25px;color: darkgreen">日期格式化处理</font><br/><br/>
+<font>格式化日期，默认的以浏览器默认语言为格式化标准:</font><span th:text="${#dates.format(currentDate)}"></span>
+<br/><br/>
+<font>按照自定义的格式做日期转换:</font><span th:text="${#dates.format(currentDate,'yyyy-MM-dd HH:mm')}"></span>
+<br/><br/>
+<font>Year:</font><span th:text="${#dates.year(currentDate)}"></span><br/>
+<font>Month:</font><span th:text="${#dates.month(currentDate)}"></span><br/>
+<font>day:</font><span th:text="${#dates.day(currentDate)}"></span>
+<hr/>
+<font style="font-size: 25px;color: darkgreen">条件判断</font><br/>
+<div>
+    <div><font style="color: dodgerblue">th:if</font></div>
+    <span th:if="${sex == '男'}">
+        性别：男
+    </span>
+    <span th:if="${sex != '男'}">
+        性别：女
+    </span>
+    <br/>
+    <div><font style="color: dodgerblue">th:switch/th:case</font></div>
+    <div th:switch="${id}">
+        <span th:case="1">编号为:1</span>
+        <span th:case="2">编号为:2</span>
+        <span th:case="3">编号为:3</span>
+        <span th:case="*">未知编号</span>
+    </div>
+    <div><font style="color: dodgerblue">th:each</font></div>
+    <table border="1px" width="50%" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.age}"></td>
+        </tr>
+    </table>
+    <table border="1px" width="80%" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>index</th>
+            <th>count</th>
+            <th>size</th>
+            <th>odd</th>
+            <th>even</th>
+            <th>first</th>
+            <th>last</th>
+        </tr>
+        <div><font style="color: dodgerblue">th:each中的状态</font></div>
+        <!--
+            1) index:当前迭代器的索引从0 开始
+            2) count:当前迭代对象的计数从1 开始
+            3) size:被迭代对象的长度
+            4) odd/even:布尔值，当前循环是否是偶数/奇数从0 开始
+            5) first:布尔值，当前循环的是否是第一条，如果是返回true 否则返回false
+            6) last:布尔值，当前循环的是否是最后一条，如果是则返回true 否则返回false
+        -->
+        <tr th:each="user,status : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${status.index}"></td>
+            <td th:text="${status.count}"></td>
+            <td th:text="${status.size}"></td>
+            <td th:text="${status.odd}"></td>
+            <td th:text="${status.even}"></td>
+            <td th:text="${status.first}"></td>
+            <td th:text="${status.last}"></td>
+        </tr>
+    </table>
+    <br/>
+    <div><font style="color: dodgerblue">Map的迭代</font></div>
+    <table border="1px" width="50%" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>Value</th>
+        </tr>
+        <tr th:each="user : ${userMap}">
+            <td th:text="${user}"></td>
+        </tr>
+    </table>
+    <br/>
+    <table border="1px" width="50%" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Key</th>
+        </tr>
+        <tr th:each="user : ${userMap}">
+            <td th:text="${user.value.id}"></td>
+            <td th:text="${user.value.name}"></td>
+            <td th:text="${user.value.age}"></td>
+            <td th:text="${user.key}"></td>
+        </tr>
+    </table>
+    <hr/>
+    <div><font style="font-size: 25px;color: darkgreen">域操作</font></div>
+    HttpServletRequest:<span th:text="${#request.getAttribute('req')}"></span><br/>
+    HttpServletRequest2:<span th:text="${#httpServletRequest.getAttribute('req')}"></span><br/><br/>
+    HttpSession:<span th:text="${#session.getAttribute('ses')}"></span><br/>
+    HttpSession2:<span th:text="${session.ses}"></span><br/><br/>
+    Application:<span th:text="${#servletContext.getAttribute('app')}"></span><br/>
+    Application2:<span th:text="${application.app}"></span><br/>
+    <hr/>
+    <div><font style="font-size: 25px;color: darkgreen">URL表达式@{}</font></div>
+    绝对路径:<a th:href="@{https://google.com}" target="_blank">Google</a><br/>
+    相对路径之相对于当前项目的根:<a th:href="@{/login}" target="_self">去登录</a><br/>
+    相对路径之相对于基于服务器的根:<a th:href="@{~/project2/resourcename}" target="_self">暂无法演示</a><br/>
+    <div><font style="color: dodgerblue">URL表达式参数传递</font></div>
+    传统方式一:?键=值...:<a th:href="@{/getParam?id=123&name=admin}">尝试一下!</a><br/>
+    传统方式二:(键=值,键=值):<a th:href="@{/getParam(id=2,name='admin')}">尝试一下!</a><br/>
+    动态参数传统方式一需要字符串拼接:?键=值...:<a th:href="@{'/getParam?id='+${id}+'&name='+${name}}">尝试一下!</a><br/>
+    动态参数传统方式二:(键=值,键=值):<a th:href="@{/getParam(id=${id},name=${name})}">尝试一下!</a><br/>
+    <div><font style="color: dodgerblue">在restful格式的URL中传递参数</font></div>
+    <a th:href="@{/getParam4/{id}(id=200)}">Restful格式传递参数方式一单参传递</a><br/>
+    <a th:href="@{/getParam2/{id}/{name}(id=200,name='admin')}">Restful格式传递参数方式二多参传递</a><br/>
+    <a th:href="@{/getParam3/{id}(id=200,name='admin')}">Restful格式传递参数方式三多参传递</a><br/>
+    <a th:href="@{/getParam3/{id}(id=${id},name=${name})}">Restful格式传递参数方式四多参动态传递</a><br/>
+
+
+</div>
+</body>
+</html>

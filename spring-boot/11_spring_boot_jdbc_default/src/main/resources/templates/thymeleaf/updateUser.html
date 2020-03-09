@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加User</title>
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+</head>
+<body>
+    <form th:action="@{/user/updateUser}" method="post">
+        <input type="hidden" th:value="${user.userid}" name="userid">
+        名称<input name="username" type="text" th:value="${user.username}" maxlength="8"><br/>
+        性别<input name="usersex" type="text" th:value="${user.usersex}" maxlength="1"><br/>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

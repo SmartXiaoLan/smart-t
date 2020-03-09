@@ -1,0 +1,43 @@
+新版Redis集群安装方式
+    1.安装RuBy环境
+        yum install ruby
+    2.安装ruby的包管理器
+        yum install rubygems
+    3.安装redis-gem
+        gem install redis
+    4.修改Redis的配置文件及其他项
+        cluster-enabled yes
+    5.编写集群Redis启动脚本
+        eg:
+            cd redis01
+            ./redis-server redis.conf
+            cd ..
+            cd redis02
+            ./redis-server redis.conf
+            cd ..
+            cd redis03
+            ./redis-server redis.conf
+            cd ..
+            cd redis04
+            ./redis-server redis.conf
+            cd ..
+            cd redis05
+            ./redis-server redis.conf
+            cd ..
+            cd redis06
+            ./redis-server redis.conf
+    6.通过redis-cli创建集群
+        ./redis-cli --cluster create 192.168.66.186:8001 192.168.66.186:8002 192.168.66.186:8003 192.168.66.186:8004 192.168.66.186:8005 192.168.66.186:8006 --cluster-replicas 1
+    7.连接集群
+        ./redis-cli -h [IP地址] -p [端口号] -c
+    8.创建集群成功
+
+warning:
+    [ERR] Node 192.168.66.186:8001 DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified, no authentication password is requested to clients.
+    In this mode connections are only accepted from the loopback interface.
+    If you want to connect from external computers to Redis you may adopt one of the following solutions:
+    1) Just disable protected mode sending the command 'CONFIG SET protected-mode no' from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent.
+    2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to 'no', and then restarting the server.
+    3) If you started the server manually just for testing, restart it with the '--protected-mode no' option.
+    4) Setup a bind address or an authentication password. NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside.
+   ==>出现该错误可以在配置文件中指定IP即可，也可以设置用户名密码验证登录。

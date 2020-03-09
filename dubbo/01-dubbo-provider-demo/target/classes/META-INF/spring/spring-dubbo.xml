@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--给应用起名Provider-->
+    <dubbo:application name="myproviser"/>
+    <!--
+        配置注册中心
+        address:注册中心的IP+端口,如果zookeeper是一个集群,则需要将集群中所有的IP+端口添加该属性中，用逗号分割
+        protocol:注册中心的类型
+    -->
+    <dubbo:registry address="192.168.66.186:2181,192.168.66.186:2182,192.168.66.186:2183" protocol="zookeeper">
+
+    </dubbo:registry>
+
+    <!--
+        配置协议端口
+        name:使用的协议
+        port:
+    -->
+    <dubbo:protocol name="dubbo" port="20880">
+
+    </dubbo:protocol>
+
+    <!--
+        注册配置接口
+        interface:接口
+        ref:实现类
+    -->
+    <dubbo:service interface="com.bjsxt.service.DubboService" ref="dubboServiceImpl"></dubbo:service>
+
+    <!--接口实现类-->
+    <bean id="dubboServiceImpl" class="com.bjsxt.service.impl.DubboServiceImpl"> </bean>
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 整合单机版Solr -->
+	<!--<bean class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+		<constructor-arg value="${SOLR_SERVICE_URL}"/>
+	</bean>-->
+	
+	<!-- 整合solr集群 -->
+	<bean class="org.apache.solr.client.solrj.impl.CloudSolrServer">
+		<constructor-arg name="zkHost" value="${SOLR_CLOUD_SERVICE_URL}"/>
+		<!--配置默认索引库-->
+		<property name="defaultCollection" value="${DEFAULT_COLLECTION}"/>
+	</bean>
+</beans>

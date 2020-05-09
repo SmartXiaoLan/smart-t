@@ -1,0 +1,65 @@
+权限及用户创建
+
+    1.MongoDB中可用的权限列表
+        -|---------------------|------------------------------------------------------------------|-
+         |Read                 | 允许用户读取指定数据库                                              |
+         |ReadWrite            | 允许用户读写指定数据库                                              |
+         |dbAdmin              | 允许用户在指定数据库中执行管理                                       |
+         |userAdmin            | 允许用户向system.users集合写入,可以找指定数据库里创建、删除和管理用户   |
+         |clusterAdmin         | 只在admin数据库中可用,赋予用户所有分片和复制集相关函数的管理权限        |
+         |readAnyDatabase      | 只在admin数据库中可用,赋予用户所有数据库的读权限                      |
+         |readWriteAnyDatabase | 只在admin数据库中可用,赋予用户所有数据库的读写权限                    |
+         |userAdminAnyDatabase | 只在admin数据库中可用,赋予用户所有数据库的userAdmin权限               |
+         |dbAdminAnyDatabase   | 只在admin数据库中可用,赋予用户所有数据库的dbAdmin权限                 |
+         |root                 | 只在admin数据库中可用,超级账号，超级权限                             |
+        -|---------------------|------------------------------------------------------------------|-
+
+    2.管理员用户
+        Ⅰ.切换使用指定数据库
+            use <database name>
+        Ⅱ.查看admin中的用户
+            db.system.users.find()
+        Ⅲ.创建用户
+            -|---------------------------------------------------------------|-
+             |   db.createUser({                                             |
+             |      user: "<name>",                                          |
+             |      pwd: "<cleartext password>",                             |
+             |      customData: { <any information> },                       |
+             |      roles: [                                                 |
+             |          { role: "<role>", db: "<database>" } | "<role>",     |
+             |          ...                                                  |
+             |      ]                                                        |
+             |  });                                                          |
+            -|---------------------------------------------------------------|-
+                1)user:新建用户名。
+                2)pwd:新建用户密码。
+                3)customData:存放一些用户相关的自定义数据，该属性也可忽略。
+                4)roles:数组类型，配置用户的权限。
+
+             WARN:管理员账户创建完成后需要重启mongoDB,并开启验证.
+         Ⅳ.数据库用户认证
+            1)开启认证增加启动参数--auth
+
+            2)认证函数
+                db.auth("userName","passWord")
+
+    3.普通用户
+        Ⅰ.数据库直接可以切换没有的数据库表示创建数据库
+        Ⅱ.创建用户语法一样，roles中给予的权限不同
+
+    4.用户更新
+        Ⅰ.角色更新
+            ▷需要当前用户具有userAdminAnyDatabase或更高的权限。
+            ▷语法(需切换到对应库)
+                db.updateUser("<userName>",{roles:[{ role: "<role>", db: "<database>" },..]})
+
+        Ⅱ.更新密码
+            ▷使用db.updateUser()函数修改密码
+                db.updateUser("<userName>",{pwd:"<NewPassword>"})
+            ▷使用db.changeUserPassword()函数修改密码
+                db.changeUserPassword("<UserName>","<NewPassword>")
+
+        Ⅲ.删除用户
+            ▷需要当前用户具有userAdminAnyDatabase权限。
+            ▷语法(需切换到对应库)
+                db.dropUser("<UserName>")

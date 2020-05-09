@@ -1,0 +1,276 @@
+数据库的使用及操作(Base MongoDB-4.2.5)
+
+    一、数据库自身操作
+        1.use 命令
+            ▷切换指定数据库
+            ▷如果切换的数据库不存在，则创建数据库
+
+                                use <database name>
+
+        2.查看所有数据库
+            ▷开启了用户认证则需要先登录方可查看结果。如果使用的是dbAdminAnyDatabase权限则可以看到所有的数据库
+
+                                show databases 或 show dbs
+
+            ▷只显示有数据的数据库。普通用户只显示当前拥有的数据库。
+
+        3.删除数据库
+            ▷开启了用户认证则需要使用的是dbAdminAnyDatabase权限才可以删除数据库。
+
+                                db.dropDatabase("<db>")
+
+    二、数据库数据的操作
+            MongoDB中的集合是一组文档的集，类似于数据表的概念。
+
+        1.集合的创建
+
+            如果开启了认证则需要当前用户具有dbAdminAnyDatabase权限。
+
+            基本语法形式:db.createCollection(name, options)
+                    name:集合名称
+                    option:可选参数，指定内存大小索引等。
+            -|---------------------------------------------------------------------|-
+             |      db.createCollection( <name>,                                   |
+             |         {                                                           |
+             |           capped: <boolean>,                                        |
+             |           autoIndexId: <boolean>,                                   |
+             |           size: <number>,                                           |
+             |           max: <number>,                                            |
+             |           storageEngine: <document>,                                |
+             |           validator: <document>,                                    |
+             |           validationLevel: <string>,                                |
+             |           validationAction: <string>,                               |
+             |           indexOptionDefaults: <document>,                          |
+             |           viewOn: <string>,              // Added in MongoDB 3.4    |
+             |           pipeline: <pipeline>,          // Added in MongoDB 3.4    |
+             |           collation: <document>,         // Added in MongoDB 3.4    |
+             |           writeConcern: <document>                                  |
+             |         }                                                           |
+             |      )                                                              |
+            -|---------------------------------------------------------------------|-
+                option参数详解:
+                    option:可选的。 要创建一个上限集合，请指定true。 如果指定true，则还必须在size字段中设置最大大小。
+                    autoIndexId:可选的。 指定false可禁用在_id字段上自动创建索引。
+                                WARN:从MongoDB 4.0开始，在本地数据库以外的数据库中创建集合时，不能将选项autoIndexId设置为false。
+                                     从3.2版开始不推荐使用。
+                    size:可选的。 指定上限集合的最大大小（以字节为单位）。 一旦上限集合达到最大大小，MongoDB就会删除较旧的文档以为新文档腾出空间。 上限集合是必填字段，其他集合则忽略该字段。
+                    max:可选的。 固定集合中允许的最大文档数。如果有上限的集合在达到最大文档数之前达到大小限制，则MongoDB会删除旧文档。
+                    .....
+                    DOCUMENT WEB PAGE:https://docs.mongodb.com/manual/reference/method/db.createCollection/#db.createCollection
+
+                插入文档时:MongoDB先检查指定上限集合size字段,然后再检查max字段(开启的情况下)
+
+             1)在直接插入数据时会插入默认集合，集合名为数据库名。
+
+        2.查看集合
+                            show collections或show tables
+
+        3.删除集合
+            ▷需要当前用户具有dbAdminAnyDatabase权限。
+
+                            db.<collection name>.drop()
+
+        4.insert()函数文档(数据)插入
+            ▷所有存储在集合中的数据都是BSON(Binary JSON)格式数据
+
+            Ⅰ.单文档插入
+
+                            db.<collection_name>.insert(document)
+
+                            db.<collection_name>.save(document)
+
+                            db.<collection_name>.insertOne(document)(ver.3.5以上)
+
+            Ⅱ.多文档插入
+
+                            db.<collection_name>.insert([{document},{document},...])
+
+                            db.<collection_name>.save([{document},{document},...])
+
+                            db.<collection_name>.insertMany([{document},{document},...])(ver.3.2以上)
+
+            Ⅲ.变量插入文档
+
+                            document = (document) | document = ([{document},{document},...])
+
+                            e.g:
+                            db.<collection_name>.insert(document | document)
+
+        5.更新文档update()(save())函数
+            Ⅰ.update()函数
+
+                WARN:该操作会替换匹配数据的所有内容为{update}
+                            db.<collection_name>.update({query},{update},{option})
+
+            Ⅱ.更新操作符
+
+                该操作只会替换匹配数据的对应键内容
+
+                            db.<collection_name>.update({query},{operator:{update}},{option})
+
+                1)$set:用于指定一个键并更新键值，若键不存在并创建。
+
+                    批量更新:使用 multi 参数实现批量更新
+
+                            db.<collection_name>.update({query},{operator:{update}},{multi:true})
+
+                2)$inc:可以对文档的某一个为数值型(只能为满足要求的数字)的键进行增减的操作
+
+                            db.<collection_name>.update({query},{operator:{key:value(number | -number)}})
+
+                3)$unset:删除键
+
+                            db.<collection_name>.update({query},{operator:{key:1}})
+
+                数组类型操作
+
+                4)$push:向文档的某个数组类型添加一个数组元素，不过滤重复元素。添加时健存在要求值类型为数组，如不存在创建
+                        一个数组。
+
+                            db.<collection_name>.update({query},{operator:{key:value}})
+
+                5)$pop:删除数组中的元素(一次一个)
+
+                            db.<collection_name>.update({query},{operator:{key:value}})
+
+                            value:
+                                1:表示从数组尾部删除
+                                -1：表示从数组头部删除
+
+                6)$pull:删除满足条件的数组中的元素
+
+                            db.<collection_name>.update({query},{operator:{key:content}})
+
+                7)$pullAll:删除满足条件的数组中的多个元素
+
+                            db.<collection_name>.update({query},{operator:{key:[content1,content2,...]}})
+
+                8)$rename:重命名键名
+
+                            db.<collection_name>.update({query},{operator:{key:rename}})
+
+            Ⅱ.save()函数
+                通过传入的文档替换已有的文档(需要传入相同的ObjectId)
+
+                            save({document})
+
+                            db.dev.save({"_id":ObjectId("--------------------"),key:value,...})
+
+        6.文档查询
+
+            DOCUMENT WEB PAGE:https://docs.mongodb.com/manual/reference/method/db.collection.find/
+
+            查询当前输入值的类型
+
+                        typeof <value>
+
+            Ⅰ.find()函数
+                            db.<collection_name>.find({query}, {projection}).pretty()
+
+                            pretty()可以格式化文档，增加可阅读性。
+
+            Ⅱ.单文档查询
+                            db.collection.findOne({query}, {projection})
+
+                只显示满足条件的第一条数据。如果未做投影操作则该方法自带格式化功能。
+
+            Ⅲ.模糊查询
+
+                可以通过//,^,$实现模糊查询，使用模糊查询查询条件不可以放在双引或单引号中
+
+                含有...的内容
+                            db.<collection_name>.find({key:/.../}, {projection}).pretty()
+                以...开头的内容
+                            db.<collection_name>.find({key:/^.../}, {projection}).pretty()
+                以...结束的内容
+                            db.<collection_name>.find({key:/...$/}, {projection}).pretty()
+
+            Ⅳ.投影操作
+
+                            db.collection.find({query}, {key1:1|0,key2:1|0...})
+                          1表示显示该列，0表示不显示该列。默认不显示。
+
+            Ⅴ.条件操作符
+                    条件操作符用于比较两个表达式并从mongodb集合中获取数据
+
+                    db.<collection_name>.find({key:{operator:condition}}) 或使用 findOne
+
+                1)基本条件运算符$gt(>)、$lt(<)、$gte(>=)、$lte(<=)、$eq(==)、$ne(!=)
+
+                              e.g:db.<collection_name>.find({key:{$gt:condition}})
+
+                2)逻辑运算算符
+
+                     $and:多条件的 并且 关系
+
+                              db.<collection_name>.find({$and:[{operator:condition},{operator:condition}....]})
+
+                          同一属性的不同条件(不指定默认)：
+
+                              db.<collection_name>.find({key:{operator1:condition1,operator2:condition2....}})
+
+                     $or:多条件的 或则 关系
+
+                              db.<collection_name>.find({$or:[{operator:condition},{operator:condition}....]})
+
+                     #允许相互嵌套
+
+                 3)$type基于BSON类型来检索集合中匹配的数据类型。
+
+
+        7.删除文档
+
+            DOCUMENT WEB PAGE:https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/
+
+            Ⅰ.db.collection.remove({query},{option})(不推荐,不自动释放磁盘空间)
+                -|-------------------------------------|-
+                 |   db.collection.remove(             |
+                 |      <query>,                       |
+                 |      {                              |
+                 |        justOne: <boolean>,          |
+                 |        writeConcern: <document>,    |
+                 |        collation: <document>        |
+                 |      }                              |
+                 |   )                                 |
+                -|-------------------------------------|-
+
+                WARN:不加justOne会删除所有匹配数据，否则只删除一条。
+                WARN:remove()方法并不会真正的释放空间。需要继续执行 db.repairDatabase() 来回收(当前MongoDB4.2.5不可用)
+
+            Ⅱ.删除单个文档并释放空间
+
+                        db.collection.deleteOne({filter},{option})
+
+                -|-------------------------------------|-
+                 |    db.collection.deleteOne(         |
+                 |       <filter>,                     |
+                 |       {                             |
+                 |          writeConcern: <document>,  |
+                 |          collation: <document>      |
+                 |       }                             |
+                -|-------------------------------------|-
+
+                删除文档中的一个元素
+
+            Ⅲ.删除多个文档并释放空间
+
+                        db.collection.deleteMany({filter},{option})
+
+                -|-------------------------------------|-
+                 |     db.collection.deleteMany(       |
+                 |        <filter>,                    |
+                 |        {                            |
+                 |           writeConcern: <document>, |
+                 |           collation: <document>     |
+                 |        }                            |
+                 |     )                               |
+                -|-------------------------------------|-
+
+                删除文档中的多个元素
+
+            Ⅳ.删除集合中的所有文档
+                1)db.collection.remove({})
+
+                2)db.collection.removeMany({})
+
+

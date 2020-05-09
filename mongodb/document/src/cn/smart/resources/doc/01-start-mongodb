@@ -1,0 +1,50 @@
+MongoDB常用的命令(Base CentOS 8,MongoDB-4.2.5)
+
+    一、启动类
+        1.初始化配置
+            Ⅰ.创建data/db目录作为数据库的数据存放位置。(必须)
+            Ⅱ.创建对应的log/[File Name].log文件用于记录后置启动日志文件。(后置启动必须)
+            Ⅲ.创建配置文件conf/[File Name].conf。
+            Ⅳ.环境变量的配置
+                export PATH=<path to mongodb directory>:$PATH
+
+        2.常规启动
+            进入bin目录: ./mongod --dbpath <path to data directory>
+
+        3.后置启动
+            WARN:必须有logpath或syslog才可以后置启动!
+            ./mongod --dbpath <path to data directory> --logpath <path to log file> --fork
+
+        4.配置文件启动
+            配置文件内容
+                -|----------------------------------------------|-
+                 |   dbpath=<path to data directory>            |
+                 |   logpath=<path to log file>                 |
+                 |   port=27017                                 |
+                 |   bind_ip=0.0.0.0                            |
+                 |   fork=true                                  |
+                 |   auth=true                                  |
+                -|----------------------------------------------|-
+
+            ./mongod --config <path to config file>
+
+        5.关闭
+            Ⅰ.mongoDB函数关闭
+                使用mongo客户端工具
+                    ./mongo
+                使用admin库
+                    use admin
+                执行关闭函数
+                    db.shutdownServer()
+
+            Ⅱ.mogod命令参数关闭
+                ./mongod --shutdown --dbpath <path to data directory>
+                或
+                ./mongod --shutdown --config <path to config file>
+
+        6.一些其他的参数
+            --port : 指定端口.(默认:27017)
+            --bind  : 绑定服务IP.
+            --quiet : 安静输出
+            --auth  : 启动验证
+            --config  : 指定加载配置文件

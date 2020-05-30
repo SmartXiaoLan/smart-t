@@ -15,13 +15,17 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
     否则会出现失效时间不一致的问题
  */
 //@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 5)
-/*
+/**
+ *
+ *  SpringDataRedis Document:https://docs.spring.io/spring-data/redis/docs/2.3.0.RELEASE/reference/html/#reference
+ *
     redisNamespace
 
     设置默认的前缀。
 
     该属性需要所有共享Session的服务都需要设置否则无效
 
+    SpringDataRedis入口类：org.springframework.data.redis.core.RedisTemplate
 
  */
 @EnableRedisHttpSession(redisNamespace = "mySpringSession")

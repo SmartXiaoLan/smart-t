@@ -7,6 +7,9 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
  * 更换序列化器需要所有服务都使用相同的序列化器
+ *
+ * 默认的序列化器：org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration#setRedisConnectionFactory(org.springframework.beans.factory.ObjectProvider, org.springframework.beans.factory.ObjectProvider)
+ *
  */
 @Configuration
 public class RedisSessionConfig {

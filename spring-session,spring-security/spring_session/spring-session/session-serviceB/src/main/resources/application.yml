@@ -1,0 +1,11 @@
+server:
+  port: 81
+
+#redis 配置
+spring:
+  redis:
+    host: 192.168.66.186
+    port: 6379
+    password: smart
+      #默认操作的数据库
+    database: 0

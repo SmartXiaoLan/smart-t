@@ -5,13 +5,12 @@
  2. ThinkingJava  :《Java编程思想》中的源码及习题答案。
  3. dubbo :dubbo基础实现方式
  4. shiro:shiro的实现方式
- 5. Swagger/swagger_demo:Swagger2用法示例
- 6. JFinal:JFinal框架Demo
- 7. activeMQ:activeMq使用与activeMq-spring boot、JsonP跨域访问、HttpClient
- 8. redis:Redis安装的注意事项、Jedis使用
- 9. spring-boot:Nothing
- 10. Swagger:Nothing
- 11. Solr:Nothing
- 12. spring-session:Spring中的缓存解决方案
+ 5. JFinal:JFinal框架Demo
+ 6. activeMQ:activeMq使用与activeMq-spring boot、JsonP跨域访问、HttpClient
+ 7. redis:Redis安装的注意事项、Jedis使用
+ 8. spring-boot:spring-boot的基本使用demo
+ 9. Swagger:Swagger2用法示例
+ 10. Solr:基于Lucene的Apache全文检索框架
+ 11. spring-session:Spring中的缓存解决方案
 
 --------------------------------------------------------------@author 某某某------------------------------------------------------

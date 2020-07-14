@@ -1,7 +1,6 @@
 # DEMO
 --------------------------------------------------------------@author Smart-T------------------------------------------------------
- 1. JavaSE  : 手写Web服务器的源码(ImplementServer)、Jar包(JarPackage)、面试遇到的问题(javaSe)、MD5Java的实现(md5_test)、spring-Mvc、
-              out-->IDEA字节码存放位置
+ 1. JavaSE  : 手写Web服务器的源码(ImplementServer)、Jar包(JarPackage)、面试遇到的问题(javaSe)、MD5Java的实现(md5_test)、spring-Mvc
  2. ThinkingJava  :《Java编程思想》中的源码及习题答案。
  3. dubbo :dubbo基础实现方式
  4. shiro:shiro的实现方式

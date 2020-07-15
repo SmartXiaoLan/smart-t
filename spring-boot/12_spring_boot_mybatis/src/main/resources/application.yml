@@ -28,3 +28,7 @@ spring:
       content-type: text/html
     mode: HTML
 
+#开启MyBatisMapperSQL语句的控制台显示
+logging:
+  level:
+    com.wyfx.mg.dao.mapper: DEBUG

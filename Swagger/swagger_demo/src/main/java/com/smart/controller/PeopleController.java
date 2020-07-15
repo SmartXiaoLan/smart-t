@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
@@ -64,7 +65,7 @@ public class PeopleController {
             @ApiImplicitParam(name = "id" , value = "123" , required = true , dataType = "double" , paramType = "body"),
             @ApiImplicitParam(name = "name" , value = "姓名" , required = true , dataType = "string" , paramType = "query")
     })
-    public People getPeople(double id ,  String name){
+    public People getPeople(double id , String name , MultipartFile file){
         return null;
     }
 

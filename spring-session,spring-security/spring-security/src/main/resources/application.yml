@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+
+spring:
+  security:
+    #配置默认的用户名密码
+    user:
+      name: admin
+      password: admin
+#  mvc:
+#    servlet:
+#      path: /smart

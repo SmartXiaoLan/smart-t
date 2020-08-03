@@ -31,7 +31,7 @@ public class PermissionController {
     private PermissionService permissionService;
 
     /**
-     * 该注解用于鉴权
+     * 该注解用于鉴别用户是否具有某些角色的
      * 多个角色满足其中一个就放行
      * @return
      */
@@ -44,7 +44,7 @@ public class PermissionController {
     }
 
     /**
-     *  该注解控制当前方法调用前鉴权
+     *  该注解控制当前方法或类调用前鉴权
      *  or 表示多个权限中的一个
      *  and 表示同时满足
      *  支持SpEL表达式

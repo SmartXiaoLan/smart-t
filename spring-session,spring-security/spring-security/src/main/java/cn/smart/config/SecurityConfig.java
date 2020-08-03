@@ -83,7 +83,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //授权
         //url拦截
         http.authorizeRequests()
-                .antMatchers("/login.html", "/fail.html").permitAll() //要赋予所有访问权的url
+//                .antMatchers("/login.html", "/fail.html").permitAll() //要赋予所有访问权的url
+
+                //access的方式实现上面的语句
+                .antMatchers("/login.html","/fail.html").access("permitAll")
+
                 /*
                     antMatchers使用规则
                             ?  匹配一个字符
@@ -104,7 +108,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .mvcMatchers("/user/test").servletPath("/smart").permitAll()
                 .antMatchers("/smart/user/test").permitAll()
 
-
                 //权限的判断
                 //单个权限
 //                .antMatchers("/mainA.html").hasAuthority("admin1")
@@ -116,14 +119,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //单个
 //                .antMatchers("/mainA.html").hasRole("aDMIN")
                 //多个
-                .antMatchers("/mainA.html").hasAnyRole("aDMIN", "ADMIN")
+//                .antMatchers("/mainA.html").hasAnyRole("aDMIN", "ADMIN")
 
+                //access的方式实现上面的语句
+//                .antMatchers("/mainA.html").access("hasRole('admin')")
 
                 //IP判断
 //                .antMatchers("/mainA.html").hasIpAddress("127.0.0.1")
 
 
                 .anyRequest().authenticated() //所有请求都必须认证才可以访问
+                //access()结合自定义方法的权限控制 , 与上面的代码类似
+//                .anyRequest().access("@customAccessServiceImpl.hasPermission(request,authentication)")
+
         ;
 
 

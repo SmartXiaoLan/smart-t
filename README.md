@@ -1,22 +1,19 @@
-# DEMO
+# 技术栈积累日志
 
-| 序号 |  状态 | 项目名称 | 项目内容概述 | 描述 |
+| 序号 |  状态 | 项目名称 | 项目内容概述 | 描述 | 编写信息 |
 | :--: | :--: | :--: | :--: | :--: | :--: |
-| SMART-T |
-| 1 | | JavaSE | 手写Web服务器的源码(ImplementServer)、Jar包(JarPackage)、面试遇到的问题(javaSe)、MD5Java的实现(md5_test)、spring-Mvc | |
+| 1 | 无 | JavaSE | 手写Web服务器的源码(ImplementServer)、Jar包(JarPackage)、面试遇到的问题(javaSe)、MD5Java的实现(md5_test)、spring-Mvc | 无 | SMART-T |
+| 2 | 进行中 | ThinkingJava | 《Java编程思想》中的源码及习题答案。 | 无 | SMART-T |
+| 3 | 无 | dubbo | dubbo基础实现方式 | 无 | SMART-T |
+| 4 | 无 | shiro | shiro安全框架 | 无 | SMART-T |
+| 5 | 进行中 | JFinal | JFinal框架Demo | 无 | SMART-T |
+| 6 | 无 | activeMQ | activeMq使用与activeMq-spring boot、JsonP跨域访问、HttpClient | 无 | SMART-T |
+| 7 | 无 | redis | Redis安装的注意事项、Jedis使用 | 无 | SMART-T |
+| 8 | 无 | spring-boot | spring-boot的基本使用demo | 无 | SMART-T |
+| 9 | 无 | Swagger | Swagger2用法示例 | 无 | SMART-T |
+| 10 | 无 | Solr | 基于Lucene的Apache全文检索框架 | 无 | SMART-T |
+| 11 | 进行中 | spring-session | Spring中的缓存解决方案 | 无 | SMART-T |
+| 12 | 无 | spring-security | Spring安全框架 | 无 | SMART-T |
+| 13 | 创建中 |  | ElasticSearch、Logstash、Kibana技术栈 | 无 | SMART-T |
+| 14 | 进行中 | mongodb | mongodb使用文档、Java操作API、SpringDataMongoDB | 无 | SMART-T |
 
- 2. Name:[ThinkingJava]:《Java编程思想》中的源码及习题答案。
- 3. Name:[dubbo]:dubbo基础实现方式
- 4. Name:[shiro]:shiro的实现方式
- 5. Name:[JFinal]:JFinal框架Demo
- 6. Name:[activeMQ]:activeMq使用与activeMq-spring boot、JsonP跨域访问、HttpClient
- 7. Name:[redis]:Redis安装的注意事项、Jedis使用
- 8. Name:[spring-boot]:spring-boot的基本使用demo
- 9. Name:[Swagger]:Swagger2用法示例
- 10. Name:[Solr]:基于Lucene的Apache全文检索框架
- 11. Name:[spring-session]:Spring中的缓存解决方案
- 12. Name:[spring-security]:Spring安全框架
- 13. Name:[创建中...]:ElasticSearch、Logstash、Kibana技术栈
- 14. Name:[mongodb{更新中}]:mongodb使用文档、Java操作API、SpringDataMongoDB
-
--------------------------------------@author 某某某-----------------------------------------------------

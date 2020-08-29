@@ -11,6 +11,6 @@
  9. Swagger:Swagger2用法示例
  10. Solr:基于Lucene的Apache全文检索框架
  11. spring-session:Spring中的缓存解决方案
- 12. spring-security:Spring安全框架(未更新完)
+ 12. spring-security:Spring安全框架
 
 -------------------------------------@author 某某某-----------------------------------------------------

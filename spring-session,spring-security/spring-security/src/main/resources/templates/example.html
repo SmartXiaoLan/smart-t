@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--thymeleaf中获取一些参数，需要添加JAR包-->
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--获取一些属性  sec:authentication-->
+    登录账号：<span sec:authentication="name"></span><br>
+    主题中获取登录账号：<span sec:authentication="principal.username"></span><br>
+    获取凭证：<span sec:authentication="credentials"></span><br>
+    权限和角色：<span sec:authentication="authorities"></span><br>
+    客户端IP：<span sec:authentication="details.remoteAddress"></span>
+<!--权限判断    sec:authorize=""和access(expr) 用法一致 -->
+<hr>
+    <button sec:authorize="hasAuthority('/insert')">Add</button>
+    <button sec:authorize="hasAuthority('/permission/deleteUser')">Remove</button>
+    <button sec:authorize="hasAuthority('/update')">Update</button>
+    <button sec:authorize="hasAuthority('/getUser')">ShowUser</button>
+<br>
+    <button sec:authorize="hasRole('ADMIN')">Add</button>
+    <button sec:authorize="hasRole('ADMIN')">Remove</button>
+    <button sec:authorize="hasRole('ADMIN')">Update</button>
+    <button sec:authorize="hasRole('ADMIN')">ShowUser</button>
+</body>
+</html>

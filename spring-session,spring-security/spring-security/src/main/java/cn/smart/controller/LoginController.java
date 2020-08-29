@@ -18,6 +18,16 @@ public class LoginController {
     }*/
 
     /**
+     * thymeleaf测试接口
+     * @return
+     */
+    @RequestMapping("/example")
+    public String example(){
+        return "example";
+    }
+
+
+    /**
      * 主页面跳转方法
      *
      * @return

@@ -1,0 +1,18 @@
+<!--CSRF测试页面-->
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--配置过后的参数名-->
+<form action="/login" method="post">
+    <input type="hidden" th:value="${_csrf.token}" name="_csrf" th:if="${_csrf}">
+    UserName:<input type="text" name="username">
+    Password:<input type="password" name="password">
+    <button type="submit">LOGIN</button>
+</form>
+</body>
+</html>

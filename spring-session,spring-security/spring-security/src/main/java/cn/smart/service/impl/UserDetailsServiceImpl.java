@@ -42,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
         //返回用户名，密码，权限列表
-        return new User(username,password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_ADMIN,/main.html"));//access()结合自定义方法的权限控制添加/main.html
+        return new User(username,password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_ADMIN,/main.html,/permission/deleteUser"));//access()结合自定义方法的权限控制添加/main.html
 
         //认证成功后再授权的写法
 //        return new User(username,password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_ADMIN"));

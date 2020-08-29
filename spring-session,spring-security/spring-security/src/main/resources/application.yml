@@ -11,3 +11,8 @@ spring:
 #  mvc:
 #    servlet:
 #      path: /smart
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///smart_java_db
+    username: root
+    password: root

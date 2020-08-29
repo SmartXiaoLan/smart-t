@@ -1,10 +1,9 @@
 package cn.smart.config;
 
 import cn.smart.filter.MyFilter;
-import cn.smart.handler.MyAccessDeniedHandler;
-import cn.smart.handler.MyAuthenticationFailureHandler;
-import cn.smart.handler.MyAuthenticationSuccessHandler;
+import cn.smart.handler.*;
 import cn.smart.param.ConstantParam;
+import cn.smart.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 /**
  * @author Smart-T
@@ -32,6 +34,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //自定义访问受限页面
     @Autowired
     private MyAccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private PersistentTokenRepository tokenRepository;
 
     /**
      * 注入自定义逻辑的密码解析器
@@ -64,6 +75,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .xssProtection();
         // 禁用缓存
 //              .cacheControl();
+
+
+        //自定义登录入口点
+        http.httpBasic().authenticationEntryPoint(new MyAuthenticationEntryPoint());
+
 
         //认证
         http.formLogin()//自定义表单配置相关项
@@ -134,9 +150,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         ;
 
+        //RememberMe(优先内存中的Token)
+        /*http.rememberMe()
+                .tokenValiditySeconds(15) //token有效期
+                .rememberMeParameter(ConstantParam.MY_DEFAULT_REMEMBER_ME_KEY)  //修改默认记住我键名
+                .userDetailsService(this.userDetailsService) //用户登录逻辑对象
+                .tokenRepository(this.tokenRepository); //自定义Token存储方式*/
+
 
         //关闭csrf防护否则上面的逻辑走不到
         http.csrf().disable();
+
+
+        //退出登录
+        /*
+            重要的类 LogoutFilter
+         */
+        http.logout()
+//                .invalidateHttpSession(true) //清除Session对象，默认True
+//                .addLogoutHandler()
+//                .logoutUrl("/user/logout") //一定义推出登录URL
+//                .logoutSuccessHandler(new MyLogoutSuccessHandler())  //自定义退出登录成功处理器
+//                .deleteCookies("JSESSIONID","[OtherKey]") //需要删除的Cookie
+//                .clearAuthentication(true) //清除认证信息 ，默认为true
+                .logoutSuccessUrl("/login.html"); //推出成功后跳转URL
 
 
         //异常处理
@@ -144,6 +181,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //访问受限
                 .accessDeniedHandler(this.accessDeniedHandler);
     }
+
+    /*@Bean
+    //配置tokenRepository配置类。记住我Token存储方式
+    public PersistentTokenRepository  getPersistentTokenRepository(){
+
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(this.dataSource);
+
+        //在项目启动时创建rememberMe的表。第二次启动请注释此代码。
+        *//*
+            会在数据库中创建一个：persistent_logins
+            的表里面包含字段有
+                username：用户名
+                series：主键
+                token：token令牌
+                last_used：最后登录使用时间
+
+         *//*
+//        jdbcTokenRepository.setCreateTableOnStartup(true);
+
+        return jdbcTokenRepository;
+    }*/
 }
 
 /*

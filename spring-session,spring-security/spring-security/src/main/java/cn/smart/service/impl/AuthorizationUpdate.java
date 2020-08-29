@@ -1,6 +1,7 @@
 package cn.smart.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -38,6 +39,10 @@ public class AuthorizationUpdate {
             // 生成新的认证信息
             Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
                     AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN,admin"));
+            /*
+                使用Apache字符串处理工具可以去除[]符号，详见API
+             */
+//            String strip = StringUtils.strip("abc  234", "23");
             // 重置认证信息
             SecurityContextHolder.getContext().setAuthentication(newAuth);
             return true;

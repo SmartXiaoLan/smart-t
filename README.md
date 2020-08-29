@@ -12,6 +12,7 @@
  10. Name:[Solr]:基于Lucene的Apache全文检索框架
  11. Name:[spring-session]:Spring中的缓存解决方案
  12. Name:[spring-security]:Spring安全框架
- 13. Name:[创建中...]:ElasticSearch、Logstash、Kibana技术栈(更新中...)
+ 13. Name:[创建中...]:ElasticSearch、Logstash、Kibana技术栈
+ 14. Name:[mongodb{更新中}]:mongodb使用文档、Java操作API、SpringDataMongoDB
 
 -------------------------------------@author 某某某-----------------------------------------------------

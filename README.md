@@ -9,9 +9,9 @@
  7. Name:[redis]:Redis安装的注意事项、Jedis使用
  8. Name:[spring-boot]:spring-boot的基本使用demo
  9. Name:[Swagger]:Swagger2用法示例
- 10.Name:[Solr]:基于Lucene的Apache全文检索框架
- 11.Name:[spring-session]:Spring中的缓存解决方案
- 12.Name:[spring-security]:Spring安全框架
- 13.Name:[创建中...]:ElasticSearch、Logstash、Kibana技术栈(更新中...)
+ 10. Name:[Solr]:基于Lucene的Apache全文检索框架
+ 11. Name:[spring-session]:Spring中的缓存解决方案
+ 12. Name:[spring-security]:Spring安全框架
+ 13. Name:[创建中...]:ElasticSearch、Logstash、Kibana技术栈(更新中...)
 
 -------------------------------------@author 某某某-----------------------------------------------------

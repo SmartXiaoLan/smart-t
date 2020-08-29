@@ -12,5 +12,6 @@
  10. Solr:基于Lucene的Apache全文检索框架
  11. spring-session:Spring中的缓存解决方案
  12. spring-security:Spring安全框架
+ 13. ElasticSearch、Logstash、Kibana技术栈(更新中...)
 
 -------------------------------------@author 某某某-----------------------------------------------------

@@ -14,6 +14,6 @@
 | 10 | 完成 | Solr | 基于Lucene的Apache全文检索框架 | 无 | SMART-T |
 | 11 | 进行中 | spring-session | Spring中的缓存解决方案 | 无 | SMART-T |
 | 12 | 完成 | spring-security | Spring安全框架 | 无 | SMART-T |
-| 13 | 创建中 |  | ElasticSearch、Logstash、Kibana技术栈 | 无 | SMART-T |
+| 13 | 进行中 | ELK | ElasticSearch、Logstash、Kibana技术栈 | 无 | SMART-T |
 | 14 | 进行中 | mongodb | mongodb使用文档、Java操作API、SpringDataMongoDB | 无 | SMART-T |
 

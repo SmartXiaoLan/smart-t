@@ -1,15 +1,11 @@
-package com.shaoteemo;
+package cn.smart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * @author Smart-T
- * @since 30/08/2020
- */
 @SpringBootApplication
-public class AppRun {
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(AppRun.class,args);
+        SpringApplication.run(Application.class,args);
     }
 }

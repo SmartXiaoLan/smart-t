@@ -29,6 +29,7 @@ import javax.sql.DataSource;
 @Configuration
 //开启方法(接口)注解权限
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //自定义访问受限页面

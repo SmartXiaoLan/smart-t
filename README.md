@@ -9,11 +9,11 @@
 | 5 | 进行中 | JFinal | JFinal框架Demo | 无 | SMART-T |
 | 6 | 完成 | activeMQ | activeMq使用与activeMq-spring boot、JsonP跨域访问、HttpClient | 无 | SMART-T |
 | 7 | 完成 | redis | Redis安装的注意事项、Jedis使用 | 无 | SMART-T |
-| 8 | 完成 | spring-boot | spring-boot的基本使用demo | 已迁移独立仓库 | SMART-T |
+| 8 | 完成 | spring-boot | spring-boot的基本使用demo | 已迁至spring-boot移独立仓库 | SMART-T |
 | 9 | 完成 | Swagger | Swagger2用法示例 | 无 | SMART-T |
 | 10 | 完成 | Solr | 基于Lucene的Apache全文检索框架 | 无 | SMART-T |
 | 11 | 进行中 | spring-session | Spring中的缓存解决方案 | 无 | SMART-T |
 | 12 | 完成 | spring-security | Spring安全框架 | 无 | SMART-T |
 | 13 | 进行中 | ELK | ElasticSearch、Logstash、Kibana技术栈 | 已迁移SearchEngine仓库 | SMART-T |
 | 14 | 进行中 | mongodb | mongodb使用文档、Java操作API、SpringDataMongoDB | 无 | SMART-T |
-| 15 | 进行中 | spring cloud | spring cloud微服务 | 无 | SMART-T |
+| 15 | 进行中 | spring cloud | spring cloud微服务 | 已迁移至microservice仓库 | SMART-T |

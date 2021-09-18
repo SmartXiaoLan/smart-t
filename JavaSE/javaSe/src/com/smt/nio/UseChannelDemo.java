@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.channels.DatagramChannel;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
@@ -102,6 +104,40 @@ public class UseChannelDemo {
 
         //关闭套接字连接
         socketChannel.close();
+
+    }
+
+    /**
+     * 数据包管道(UDP)
+     *  默认的是阻塞管道
+     */
+    public void datagramChannel() throws IOException{
+        //数据报管道创建
+        DatagramChannel datagramChannel = DatagramChannel.open();
+
+        //设置非阻塞
+        datagramChannel.configureBlocking(false);
+
+        //监听端口的绑定
+        datagramChannel.bind(new InetSocketAddress(10086));
+
+        //设置缓冲区
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+
+        //接受数据到缓冲区
+        SocketAddress receive = datagramChannel.receive(buffer);
+
+        //缓冲区I/O转换为读模式
+        buffer.flip();
+
+        //数据报的发送
+        datagramChannel.send(buffer , new InetSocketAddress("localhost",10087));
+
+        //清空缓冲区转换写模式
+        buffer.clear();
+
+        //关闭流
+        datagramChannel.close();
 
     }
 

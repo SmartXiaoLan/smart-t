@@ -73,7 +73,7 @@ public class Request {
         if (paraString.equals("")){
             return;
         }
-//        System.out.println(paraString);
+        System.out.println(paraString);
         //调用本类中分解请求参数的方法
         this.parseParam(paraString);
     }

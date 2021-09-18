@@ -4,6 +4,7 @@ import cn.smart.service.PermissionService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,8 @@ import javax.annotation.Resource;
 @RequestMapping("/permission")
 public class PermissionController {
 
+    //该注解可以获取登录用户信息
+    /*@AuthenticationPrincipal*/
 
     @Resource
     private PermissionService permissionService;

@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  *
- * 自定义推出登录处理器用于前后端分离
+ * 自定义退出登录处理器用于前后端分离
  *
  * @author Smart-T
  */

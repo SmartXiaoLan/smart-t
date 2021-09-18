@@ -1,5 +1,6 @@
 package com.smt.javaee;
 
+/*
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -30,3 +31,4 @@ public class LoginAction extends HttpServlet {
 
     }
 }
+*/

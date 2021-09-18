@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -42,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
+//    @Autowired
     private PersistentTokenRepository tokenRepository;
 
     /**
@@ -159,7 +161,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenRepository(this.tokenRepository); //自定义Token存储方式*/
 
 
-        //关闭csrf防护否则上面的逻辑走不到
+        //关闭csrf防护否则上面的逻辑走不到除非加入_csrf的Key
         http.csrf().disable();
 
 
@@ -180,7 +182,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //异常处理
         http.exceptionHandling()
                 //访问受限
-                .accessDeniedHandler(this.accessDeniedHandler);
+                .accessDeniedHandler(this.accessDeniedHandler)
+                //匿名用户访问拦截
+                .authenticationEntryPoint(new MyAuthenticationEntryPoint())
+        ;
+
+        //会话管理
+//        http.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)//管理JSESSIONID生成方案
+        ;
+//                .sessionAuthenticationStrategy()
     }
 
     /*@Bean

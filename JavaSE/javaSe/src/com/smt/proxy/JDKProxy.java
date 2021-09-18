@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 //代理对象
 public class JDKProxy implements InvocationHandler {
 
-    private Object obj;
+    private final Object obj;
 
     public JDKProxy(Object obj) {
         this.obj=obj;

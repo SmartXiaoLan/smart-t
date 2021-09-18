@@ -31,7 +31,7 @@ public class CopyFile {
         FileOutputStream fos = null;
         FileChannel inFileChannel = null;
         FileChannel outFileChannel = null;
-
+ 
         try {
             fis = new FileInputStream(resourceFile);
 
